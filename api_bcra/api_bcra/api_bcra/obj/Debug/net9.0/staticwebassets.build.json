@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "gDOqCi1M2rLe3ZQ0i+WR4WolgxMr2J0BwO6BcRwOUZ8=",
+  "Source": "api_bcra",
+  "BasePath": "_content/api_bcra",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}

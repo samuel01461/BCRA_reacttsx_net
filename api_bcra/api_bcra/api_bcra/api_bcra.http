@@ -1,0 +1,6 @@
+@api_bcra_HostAddress = http://localhost:5008
+
+GET {{api_bcra_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
