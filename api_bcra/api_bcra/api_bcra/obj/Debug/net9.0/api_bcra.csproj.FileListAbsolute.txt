@@ -167,3 +167,4 @@ C:\Users\User\source\repos\api_bcra\api_bcra\api_bcra\obj\Debug\net9.0\refint\ap
 C:\Users\User\source\repos\api_bcra\api_bcra\api_bcra\obj\Debug\net9.0\api_bcra.pdb
 C:\Users\User\source\repos\api_bcra\api_bcra\api_bcra\obj\Debug\net9.0\api_bcra.genruntimeconfig.cache
 C:\Users\User\source\repos\api_bcra\api_bcra\api_bcra\obj\Debug\net9.0\ref\api_bcra.dll
+C:\Users\User\source\repos\api_bcra\api_bcra\api_bcra\obj\Debug\net9.0\api_bcra.sourcelink.json

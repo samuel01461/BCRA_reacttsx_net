@@ -17,5 +17,7 @@ public partial class User
 
     public virtual ICollection<Query> Queries { get; set; } = new List<Query>();
 
+    public virtual ICollection<RefreshToken> RefreshTokens { get; set; } = new List<RefreshToken>();
+
     public virtual ICollection<UserRole> UserRoles { get; set; } = new List<UserRole>();
 }

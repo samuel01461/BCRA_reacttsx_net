@@ -22,6 +22,8 @@ public partial class BCRADbContext : DbContext
 
     public virtual DbSet<Query> Queries { get; set; }
 
+    public virtual DbSet<RefreshToken> RefreshTokens { get; set; }
+
     public virtual DbSet<Role> Roles { get; set; }
 
     public virtual DbSet<Scoring> Scorings { get; set; }
@@ -68,6 +70,28 @@ public partial class BCRADbContext : DbContext
             entity.HasOne(d => d.IdUserNavigation).WithMany(p => p.Queries)
                 .HasForeignKey(d => d.IdUser)
                 .HasConstraintName("FK__Queries__IdUser__5070F446");
+        });
+
+        modelBuilder.Entity<RefreshToken>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__Refresh___3214EC0707B4DE2B");
+
+            entity.ToTable("Refresh_tokens");
+
+            entity.Property(e => e.CreationDate)
+                .HasColumnType("datetime")
+                .HasColumnName("Creation_date");
+            entity.Property(e => e.ExpiryDate)
+                .HasColumnType("datetime")
+                .HasColumnName("Expiry_date");
+            entity.Property(e => e.IdUser).HasColumnName("Id_user");
+            entity.Property(e => e.Token)
+                .HasMaxLength(255)
+                .IsUnicode(false);
+
+            entity.HasOne(d => d.IdUserNavigation).WithMany(p => p.RefreshTokens)
+                .HasForeignKey(d => d.IdUser)
+                .HasConstraintName("FK__Refresh_t__Id_us__6FE99F9F");
         });
 
         modelBuilder.Entity<Role>(entity =>
