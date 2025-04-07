@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("api_bcra")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a6cca85e4615d14b2fb02bdd7b3203c409579677")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d5ba11444f8031c043104b72351f3f5eeac9a18e")]
 [assembly: System.Reflection.AssemblyProductAttribute("api_bcra")]
 [assembly: System.Reflection.AssemblyTitleAttribute("api_bcra")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

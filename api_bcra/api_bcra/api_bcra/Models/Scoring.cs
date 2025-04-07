@@ -18,6 +18,7 @@ public partial class Scoring
     public bool ProcJu { get; set; }
 
     public int? Entity { get; set; }
-
+    public int? Person { get; set; }
     public virtual Entity? EntityNavigation { get; set; }
+    public virtual Person? PersonNavigation { get; set; }
 }

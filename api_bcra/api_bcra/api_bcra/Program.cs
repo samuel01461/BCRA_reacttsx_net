@@ -2,13 +2,22 @@ using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using api_bcra.Context;
+using api_bcra.Repositories;
+using api_bcra.Repositories.interfaces;
+using api_bcra.Request;
+using api_bcra.Request.interfaces;
+using api_bcra.Services;
+using api_bcra.Services.interfaces;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddControllers();
+builder.Services.AddControllers().AddJsonOptions(opt =>
+{
+    opt.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+});
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -51,6 +60,22 @@ builder.Services.AddCors(cors =>
     {
         policy.AllowAnyHeader().AllowAnyOrigin().AllowAnyMethod();
     });
+});
+
+builder.Services.AddScoped<IScoringRepository, ScoringRepository>();
+builder.Services.AddScoped<IUsersRepository, UsersRepositry>();
+builder.Services.AddScoped<IUsersService, UsersService>();
+builder.Services.AddScoped<ITokenService, GenerateTokenService>();
+builder.Services.AddScoped<IMainService, MainService>();
+//builder.Services.AddScoped<IBCRAClient, BCRAClient>();
+
+var bcra_cfg = builder.Configuration.GetSection("API_Config");
+var bcra_url = bcra_cfg.GetValue<string>("URL");
+
+builder.Services.AddHttpClient<IBCRAClient, BCRAClient>(client =>
+{
+    client.BaseAddress = new Uri(bcra_url);
+    client.DefaultRequestHeaders.Add("accept", "application/json");
 });
 
 var app = builder.Build();

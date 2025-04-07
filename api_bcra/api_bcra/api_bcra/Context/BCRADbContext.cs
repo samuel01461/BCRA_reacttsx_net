@@ -33,7 +33,6 @@ public partial class BCRADbContext : DbContext
     public virtual DbSet<UserRole> UserRoles { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
         => optionsBuilder.UseSqlServer("Server=localhost;Database=bcra_api;User=bcra_usr;Password=bcra123_;TrustServerCertificate=True;MultipleActiveResultSets=True");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -42,7 +41,7 @@ public partial class BCRADbContext : DbContext
         {
             entity.HasKey(e => e.Id).HasName("PK__Entities__3214EC07ABB0B4B0");
 
-            entity.Property(e => e.Name).HasColumnType("text");
+            entity.Property(e => e.Name).HasColumnType("varchar(255)");
         });
 
         modelBuilder.Entity<Person>(entity =>
@@ -50,9 +49,9 @@ public partial class BCRADbContext : DbContext
             entity.HasKey(e => e.Id).HasName("PK__People__3214EC07F44D3737");
 
             entity.Property(e => e.Cuit)
-                .HasColumnType("text")
+                .HasColumnType("varchar(255)")
                 .HasColumnName("CUIT");
-            entity.Property(e => e.Fullname).HasColumnType("text");
+            entity.Property(e => e.Fullname).HasColumnType("varchar(255)");
         });
 
         modelBuilder.Entity<Query>(entity =>
@@ -62,10 +61,6 @@ public partial class BCRADbContext : DbContext
             entity.Property(e => e.DateQuery)
                 .HasColumnType("datetime")
                 .HasColumnName("date_query");
-
-            entity.HasOne(d => d.IdPersonNavigation).WithMany(p => p.Queries)
-                .HasForeignKey(d => d.IdPerson)
-                .HasConstraintName("FK__Queries__IdPerso__4F7CD00D");
 
             entity.HasOne(d => d.IdUserNavigation).WithMany(p => p.Queries)
                 .HasForeignKey(d => d.IdUser)
@@ -88,6 +83,9 @@ public partial class BCRADbContext : DbContext
             entity.Property(e => e.Token)
                 .HasMaxLength(255)
                 .IsUnicode(false);
+            entity.Property(e => e.Used)
+        .HasColumnName("Used")
+        .HasColumnType("tinyint");
 
             entity.HasOne(d => d.IdUserNavigation).WithMany(p => p.RefreshTokens)
                 .HasForeignKey(d => d.IdUser)
@@ -98,7 +96,7 @@ public partial class BCRADbContext : DbContext
         {
             entity.HasKey(e => e.Id).HasName("PK__Roles__3214EC07D56B1D0A");
 
-            entity.Property(e => e.Name).HasColumnType("text");
+            entity.Property(e => e.Name).HasColumnType("varchar(255)");
         });
 
         modelBuilder.Entity<Scoring>(entity =>
@@ -107,21 +105,25 @@ public partial class BCRADbContext : DbContext
 
             entity.ToTable("Scoring");
 
-            entity.Property(e => e.Period).HasColumnType("text");
+            entity.Property(e => e.Period).HasColumnType("varchar(255)");
 
             entity.HasOne(d => d.EntityNavigation).WithMany(p => p.Scorings)
                 .HasForeignKey(d => d.Entity)
                 .HasConstraintName("FK_Scoring_Entities");
+
+            entity.HasOne(d => d.PersonNavigation).WithMany(p => p.Scorings)
+                .HasForeignKey(d => d.Person)
+                .HasConstraintName("FK__Scoring__idPerso__70DDC3D8");
         });
 
         modelBuilder.Entity<User>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PK__Users__3214EC073B4BF41A");
 
-            entity.Property(e => e.Email).HasColumnType("text");
-            entity.Property(e => e.Name).HasColumnType("text");
-            entity.Property(e => e.Password).HasColumnType("text");
-            entity.Property(e => e.Username).HasColumnType("text");
+            entity.Property(e => e.Email).HasColumnType("varchar(255)");
+            entity.Property(e => e.Name).HasColumnType("varchar(255)");
+            entity.Property(e => e.Password).HasColumnType("varchar(255)");
+            entity.Property(e => e.Username).HasColumnType("varchar(255)");
         });
 
         modelBuilder.Entity<UserRole>(entity =>

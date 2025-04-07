@@ -11,6 +11,8 @@ public partial class RefreshToken
 
     public int? IdUser { get; set; }
 
+    public byte Used { get; set; }
+
     public DateTime CreationDate { get; set; }
 
     public DateTime ExpiryDate { get; set; }
