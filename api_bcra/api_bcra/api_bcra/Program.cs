@@ -21,8 +21,6 @@ builder.Services.AddControllers().AddJsonOptions(opt =>
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Logging.ClearProviders().AddConsole().AddDebug();
-
 builder.Services.AddDbContext<BCRADbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("Production"));
